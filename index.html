@@ -1,5 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="tr">
 <head>
+<meta charset="UTF-8">
+<title>Ben Yetkin | Dijital Dünyada Yaratıcılık</title>
 <style>
 * {
   margin: 0;
@@ -23,6 +26,7 @@ body {
   height: 100%;
   background: #121212;
   z-index: 0;
+  overflow: hidden;
 }
 
 .star {
@@ -40,10 +44,36 @@ body {
   50% { opacity: 1; }
 }
 
-@keyframes slideLeft {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+/* ===== YENİ: KAYAN YILDIZLAR ===== */
+.shooting-star {
+  position: absolute;
+  width: 130px;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.95),
+    transparent
+  );
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fff;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  animation: shooting-star-anim 1.1s linear forwards;
 }
+
+@keyframes shooting-star-anim {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(var(--angle));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) rotate(var(--angle));
+  }
+}
+/* ===== KAYAN YILDIZLAR BİTTİ ===== */
 
 .sliding-text {
   position: fixed;
@@ -218,26 +248,11 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  .sliding-text {
-    font-size: 2rem;
-  }
-
-  .nav {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  section h2 {
-    font-size: 1.5rem;
-  }
-
-  .content {
-    padding: 40px 20px;
-  }
+  h1 { font-size: 1.8rem; }
+  .sliding-text { font-size: 2rem; }
+  .nav { flex-direction: column; gap: 15px; }
+  section h2 { font-size: 1.5rem; }
+  .content { padding: 40px 20px; }
 }
 </style>
 </head>
@@ -324,9 +339,9 @@ a:hover {
 </div>
 
 <script>
-  // Yıldız oluştur
+  // Yıldız oluştur (mevcut)
   const starsContainer = document.getElementById('stars');
-  const starCount = 100;
+  const starCount = 120;
 
   for (let i = 0; i < starCount; i++) {
     const star = document.createElement('div');
@@ -336,6 +351,55 @@ a:hover {
     star.style.animationDelay = Math.random() * 3 + 's';
     starsContainer.appendChild(star);
   }
+
+  // ===== YENİ: KAYAN YILDIZ FONKSİYONU =====
+  function createShootingStar() {
+    const shootingStar = document.createElement('div');
+    shootingStar.className = 'shooting-star';
+
+    // Başlangıç pozisyonu (ekranın üst ve sol tarafı ağırlıklı)
+    const startX = Math.random() * window.innerWidth * 0.75;
+    const startY = Math.random() * (window.innerHeight * 0.55);
+
+    shootingStar.style.left = `${startX}px`;
+    shootingStar.style.top = `${startY}px`;
+
+    // Rastgele açı (-25° ile +25° arası)
+    const angle = Math.random() * 50 - 25;
+    shootingStar.style.setProperty('--angle', `${angle}deg`);
+
+    // Ne kadar yol gideceği
+    const distance = 450 + Math.random() * 550;
+
+    // Açıyı kullanarak x ve y mesafesini hesapla
+    const radians = angle * Math.PI / 180;
+    const tx = Math.cos(radians) * distance;
+    const ty = Math.sin(radians) * distance;
+
+    shootingStar.style.setProperty('--tx', `${tx}px`);
+    shootingStar.style.setProperty('--ty', `${ty}px`);
+
+    starsContainer.appendChild(shootingStar);
+
+    // Animasyon bitince elementi sil
+    setTimeout(() => {
+      if (shootingStar.parentNode) {
+        shootingStar.parentNode.removeChild(shootingStar);
+      }
+    }, 1200);
+  }
+
+  // Her 1.8 - 3.5 saniyede bir kayan yıldız oluştur
+  setInterval(() => {
+    createShootingStar();
+  }, 2200);
+
+  // İlk başta birkaç tane hemen çıksın
+  setTimeout(() => {
+    createShootingStar();
+    setTimeout(createShootingStar, 600);
+  }, 1200);
+  // ===== KAYAN YILDIZ KODU BİTTİ =====
 
   // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
