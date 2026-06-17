@@ -1,0 +1,353 @@
+<html>
+<head>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #121212;
+  color: #D1D1D1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #121212;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes slideLeft {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.sliding-text {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  font-size: 4rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  white-space: nowrap;
+  animation: slideLeft 15s linear infinite;
+  z-index: 1;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 80px;
+  padding-top: 40px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  color: #D1D1D1;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 5px;
+}
+
+.nav a:hover {
+  color: #FFFFFF;
+  border-bottom-color: #721C24;
+}
+
+section {
+  margin-bottom: 60px;
+  scroll-margin-top: 60px;
+}
+
+section h2 {
+  font-size: 1.8rem;
+  color: #FFFFFF;
+  margin-bottom: 30px;
+  border-left: 4px solid #721C24;
+  padding-left: 15px;
+}
+
+.quote {
+  background: rgba(114, 28, 36, 0.15);
+  border-left: 4px solid #721C24;
+  padding: 20px 25px;
+  margin-bottom: 40px;
+  font-style: italic;
+  color: #D1D1D1;
+  border-radius: 4px;
+}
+
+.about-content {
+  color: #D1D1D1;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.skill-card {
+  background: rgba(209, 209, 209, 0.05);
+  border: 1px solid rgba(209, 209, 209, 0.15);
+  padding: 25px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+  border-color: #721C24;
+  background: rgba(114, 28, 36, 0.1);
+  transform: translateY(-5px);
+}
+
+.skill-title {
+  color: #FFFFFF;
+  font-weight: bold;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.skill-description {
+  color: #D1D1D1;
+  font-size: 0.95rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #721C24;
+  border-radius: 50%;
+  color: #721C24;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.social-links a:hover {
+  background: #721C24;
+  color: #FFFFFF;
+  transform: scale(1.1);
+}
+
+footer {
+  text-align: center;
+  padding: 40px;
+  color: #D1D1D1;
+  border-top: 1px solid rgba(209, 209, 209, 0.1);
+  margin-top: 80px;
+}
+
+.highlight {
+  color: #FFFFFF;
+}
+
+a {
+  color: #721C24;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .sliding-text {
+    font-size: 2rem;
+  }
+
+  .nav {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  section h2 {
+    font-size: 1.5rem;
+  }
+
+  .content {
+    padding: 40px 20px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="sliding-text">Ben Yetkin!</div>
+
+<div class="content">
+  <header>
+    <h1>Dijital Dünyada Yaratıcılık</h1>
+    <nav class="nav">
+      <a href="#hakkimda">Hakkımda</a>
+      <a href="#yetenekler">Yetenekler</a>
+      <a href="#linkler">İletişim</a>
+    </nav>
+  </header>
+
+  <section id="hakkimda">
+    <h2>Hakkımda</h2>
+    
+    <div class="quote">
+      « Parce qu'en fin de compte : les faits trompent, mais les détails révèlent toujours la vérité. » - Yetkin
+    </div>
+
+    <div class="about-content">
+      Ben <span class="highlight">Yetkin</span>, yaşın ya da sınırların ötesinde dijital alanlarda kendimi geliştiriyorum. Teknoloji ve yaratıcılık benim tutkum. Bazen <span class="highlight">şiirler ve eserler</span> üretiyorum, bazen de kodla hayat veriyorum.
+    </div>
+
+    <div class="about-content">
+      Developer olarak, farklı alanlarla çalışıyorum ve her projede öğrenmek beni motive ediyor. Digital ekosistemi geliştirmek ve insanları birbirine bağlamak, 21. yüzyılda bence çok önemli bir misyon.
+    </div>
+  </section>
+
+  <section id="yetenekler">
+    <h2>Yeteneklerim</h2>
+
+    <div class="skills-container">
+      <div class="skill-card">
+        <div class="skill-title">🎮 Roblox Game Developer</div>
+        <div class="skill-description">
+          Roblox platformunda interaktif oyun deneyimleri tasarlıyorum ve geliştiriyorum. Yaratıcılık ve teknik bilgiyi birleştirerek kullanıcılar için benzersiz deneyimler yaratıyorum.
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-title">🔒 Siber Güvenlik</div>
+        <div class="skill-description">
+          <strong>15 sertifikama</strong> bu alanda derinlemesine bilgi sahibi olduğunu gösteriyor. Sistemleri korumak ve tehditleri analiz etmek benim özel ilgi alanlarımdan biri.
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-title">🌐 Web Geliştirme</div>
+        <div class="skill-description">
+          Gönüllü projelerle web siteleri tasarlıyorum ve geliştiriyorum. Dijital örgütlenmeyi arttırmak ve erişilebilir, kullanıcı-dostu platformlar oluşturmak benim hedefim.
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <p style="color: #D1D1D1; margin-bottom: 15px;">Sertifikalarım ve detaylı bilgiler için LinkedIn profilimi ziyaret edin:</p>
+      <a href="https://tr.linkedin.com/in/muhammet-yetkin-polat-67373239b" target="_blank" style="display: inline-block; padding: 12px 25px; border: 2px solid #721C24; color: #721C24; border-radius: 8px; transition: all 0.3s ease; text-decoration: none; font-weight: bold;">
+        LinkedIn Profilim
+      </a>
+    </div>
+  </section>
+
+  <section id="linkler">
+    <h2>İletişime Geç</h2>
+    <div style="text-align: center; color: #D1D1D1; margin-bottom: 30px;">
+      Projelerim, fikirlerim ya da işbirliği hakkında konuşmak istersen benimle iletişime geç.
+    </div>
+    <div class="social-links">
+      <a href="https://tr.linkedin.com/in/muhammet-yetkin-polat-67373239b" target="_blank" title="LinkedIn">in</a>
+      <a href="https://www.instagram.com/yetkinp27/" target="_blank" title="Instagram">📷</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Ben Yetkin • Dijital Dünyada Yaratıcılık</p>
+    <p style="font-size: 0.9rem; margin-top: 10px; color: #888;">Detaylar, asla yalan söylemez.</p>
+  </footer>
+</div>
+
+<script>
+  // Yıldız oluştur
+  const starsContainer = document.getElementById('stars');
+  const starCount = 100;
+
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    starsContainer.appendChild(star);
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
