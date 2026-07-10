@@ -9,34 +9,42 @@
         .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, #1a1a1a 0%, #101010 100%); z-index: 0; overflow: hidden; }
         .star { position: absolute; width: 3px; height: 3px; background: #FFFFFF; border-radius: 50%; opacity: 0; animation: twinkle 3s infinite; }
         @keyframes twinkle { 0% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0; transform: scale(0.5); } }
-        /* ===== YENİ: KAYAN YILDIZLAR ===== */
+        
+        /* ===== KAYAN YILDIZLAR ===== */
         .shooting-star { position: absolute; width: 180px; height: 3px; background: linear-gradient( to right, transparent, rgba(255, 100, 100, 0.95), transparent ); border-radius: 50%; box-shadow: 0 0 15px #ff6464; z-index: 1; pointer-events: none; opacity: 0; animation: shooting-star-anim 1.5s linear forwards; }
         @keyframes shooting-star-anim { 0% { opacity: 1; transform: translate(0, 0) rotate(var(--angle)); } 100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--angle)); } }
-        /* ===== KAYAN YILDIZLAR BİTTİ ===== */
+        
         .sliding-text { position: fixed; top: 50%; left: 0; width: 100%; font-size: 5rem; font-weight: 700; color: #FFFFFF; white-space: nowrap; animation: slideLeft 20s linear infinite; z-index: 1; opacity: 0.03; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3); pointer-events: none; }
         @keyframes slideLeft { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         .content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 100px 60px; }
         header { text-align: center; margin-bottom: 120px; padding-top: 40px; }
         h1 { font-size: 3.5rem; color: #FFFFFF; margin-bottom: 25px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; background: linear-gradient(to right, #FFFFFF, #FF6464); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
         .nav { display: flex; justify-content: center; gap: 40px; margin-bottom: 80px; flex-wrap: wrap; }
         .nav a { color: #E0E0E0; text-decoration: none; font-size: 1.1rem; transition: all 0.4s ease; border-bottom: 2px solid transparent; padding-bottom: 10px; font-weight: 500; }
         .nav a:hover { color: #FFFFFF; border-bottom-color: #FF6464; transform: translateY(-3px); }
+        
         section { margin-bottom: 100px; scroll-margin-top: 100px; }
         section h2 { font-size: 2.2rem; color: #FFFFFF; margin-bottom: 40px; border-left: 6px solid #FF6464; padding-left: 20px; font-weight: 600; }
         .quote { background: rgba(255, 100, 100, 0.1); border-left: 6px solid #FF6464; padding: 30px 35px; margin-bottom: 60px; font-style: italic; color: #E0E0E0; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
         .about-content { color: #E0E0E0; font-size: 1.15rem; line-height: 2; margin-bottom: 35px; }
+        
         .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 60px; }
         .skill-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 35px; border-radius: 15px; transition: all 0.4s ease; backdrop-filter: blur(10px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); }
         .skill-card:hover { border-color: #FF6464; background: rgba(255, 100, 100, 0.05); transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(255, 100, 100, 0.1); }
         .skill-title { color: #FFFFFF; font-weight: 600; margin-bottom: 15px; font-size: 1.3rem; }
         .skill-description { color: #CCCCCC; font-size: 1.05rem; }
+        
         .social-links { display: flex; gap: 25px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
-        .social-links a { display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border: 2px solid #FF6464; border-radius: 50%; color: #FF6464; text-decoration: none; transition: all 0.4s ease; font-size: 1.5rem; font-weight: bold; background: transparent; }
-        .social-links a:hover { background: #FF6464; color: #FFFFFF; transform: scale(1.15) rotate(5deg); box-shadow: 0 10px 25px rgba(255, 100, 100, 0.3); }
+        .social-links a { display: inline-flex; align-items: center; justify-content: center; padding: 0 25px; height: 60px; border: 2px solid #FF6464; border-radius: 30px; color: #FF6464; text-decoration: none; transition: all 0.4s ease; font-size: 1.1rem; font-weight: bold; background: transparent; }
+        .social-links a:hover { background: #FF6464; color: #FFFFFF; transform: scale(1.05); box-shadow: 0 10px 25px rgba(255, 100, 100, 0.3); }
+        
         footer { text-align: center; padding: 60px; color: #CCCCCC; border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 100px; background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(5px); }
         .highlight { color: #FFFFFF; font-weight: 500; text-decoration: underline; text-decoration-color: #FF6464; }
+        .terminal-text { font-family: 'Courier New', monospace; color: #FF6464; }
         a { color: #FF6464; text-decoration: none; transition: color 0.3s ease; }
         a:hover { color: #FFFFFF; text-decoration: underline; }
+        
         @media (max-width: 768px) { 
             h1 { font-size: 2.2rem; } 
             .sliding-text { font-size: 3rem; } 
@@ -64,9 +72,9 @@
 
         <section id="hakkimda">
             <h2>Hakkımda</h2>
-            <div class="quote"> « Parce qu'en fin de compte : les faits trompent, mais les détails révèlent toujours la vérité. » - Yetkin </div>
-            <div class="about-content"> Ben <span class="highlight">Yetkin</span>, yaşın ya da sınırların ötesinde dijital alanlarda kendimi geliştiriyorum. Teknoloji ve yaratıcılık benim tutkum. Bazen <span class="highlight">şiirler ve eserler</span> üretiyorum, bazen de kodla hayat veriyorum. </div>
-            <div class="about-content"> Developer olarak, farklı alanlarla çalışıyorum ve her projede öğrenmek beni motive ediyor. Digital ekosistemi geliştirmek ve insanları birbirine bağlamak, 21. yüzyılda bence çok önemli bir misyon. </div>
+            <div class="quote"> « Parce qu'en fin de compte : les faits trompent, mais les détails révèlent always la verità. » - Yetkin </div>
+            <div class="about-content"> Ben <span class="highlight">Yetkin</span>, yaşın ya da sınırların ötesinde dijital alanlarda kendimi geliştiriyorum. Teknoloji, siber dünyalar ve yaratıcılık benim tutkum. Bazen <span class="highlight">şiirler ve eserler</span> üretiyorum, bazen de kodla hayat veriyorum. </div>
+            <div class="about-content"> Developer ve güvenlik meraklısı olarak, farklı alanlarla çalışıyorum ve her projede altyapıyı daha güvenli hale getirmek beni motive ediyor. Digital ekosistemi geliştirmek ve korumak bence çok önemli bir misyon. </div>
         </section>
 
         <section id="yetenekler">
@@ -77,8 +85,8 @@
                     <div class="skill-description"> Roblox platformunda interaktif oyun deneyimleri tasarlıyorum ve geliştiriyorum. Yaratıcılık ve teknik bilgiyi birleştirerek kullanıcılar için benzersiz deneyimler yaratıyorum. </div>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-title">🛡️ Siber Güvenlik</div>
-                    <div class="skill-description"> <strong class="highlight">15 sertifikama</strong> bu alanda derinlemesine bilgi sahibi olduğunu gösteriyor. Sistemleri korumak ve tehditleri analiz etmek benim özel ilgi alanlarımdan biri. </div>
+                    <div class="skill-title"><span class="terminal-text">>_</span> Siber Güvenlik & Analiz</div>
+                    <div class="skill-description"> Sistem güvenliği, zafiyet analizleri ve pentest süreçlerine odaklanıyorum. Sahip olduğum <strong class="highlight">15 sertifika</strong> bu alandaki derinlemesine bilgi birikimimi ve pratik yetkinliğimi destekliyor. </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-title">💻 Web Geliştirme</div>
@@ -110,19 +118,21 @@
                     </div>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-title">🤝 Topluluk & Güvenlik</div>
+                    <div class="skill-title">🛡️ Sunucu Güvenliği</div>
                     <div class="skill-description">
-                        Siber güvenlik deneyimimi Pusat RP altyapısına entegre ederek, veri güvenliğini sağlıyor ve hile/saldırı girişimlerine karşı koruma duvarları oluşturuyorum.
+                        Siber güvenlik deneyimimi Pusat RP altyapısına entegre ederek, veri güvenliğini sağlıyor ve hile/saldırı (exploit) girişimlerine karşı koruma duvarları oluşturuyorum.
                     </div>
                 </div>
             </div>
         </section>
+
         <section id="linkler">
             <h2>İletişime Geç</h2>
-            <div style="text-align: center; color: #E0E0E0; margin-bottom: 40px; font-size: 1.15rem;"> Projelerim, fikirlerim ya da işbirliği hakkında konuşmak istersen benimle iletişime geç. </div>
+            <div style="text-align: center; color: #E0E0E0; margin-bottom: 40px; font-size: 1.15rem;"> Projelerim, kaynak kodlarım ya da işbirliği hakkında konuşmak istersen benimle iletişime geç. </div>
             <div class="social-links"> 
-                <a href="https://tr.linkedin.com/in/muhammet-yetkin-polat-67373239b" target="_blank" title="LinkedIn">in</a> 
-                <a href="https://www.instagram.com/yetkinp27/" target="_blank" title="Instagram">ig</a> 
+                <a href="https://github.com/Yetkin-polat" target="_blank" title="GitHub">GitHub Github/Yetkin-polat</a>
+                <a href="https://tr.linkedin.com/in/muhammet-yetkin-polat-67373239b" target="_blank" title="LinkedIn">LinkedIn</a> 
+                <a href="https://www.instagram.com/yetkinp27/" target="_blank" title="Instagram">Instagram</a> 
             </div>
         </section>
 
@@ -145,28 +155,23 @@
             starsContainer.appendChild(star);
         }
 
-        // ===== YENİ: KAYAN YILDIZ FONKSİYONU =====
+        // ===== KAYAN YILDIZ FONKSİYONU =====
         function createShootingStar() {
             const shootingStar = document.createElement('div');
             shootingStar.className = 'shooting-star';
-            // Başlangıç pozisyonu (ekranın üst ve sol tarafı ağırlıklı)
             const startX = Math.random() * window.innerWidth * 0.8;
             const startY = Math.random() * (window.innerHeight * 0.6);
             shootingStar.style.left = `${startX}px`;
             shootingStar.style.top = `${startY}px`;
-            // Rastgele açı (-30° ile +30° arası)
             const angle = Math.random() * 60 - 30;
             shootingStar.style.setProperty('--angle', `${angle}deg`);
-            // Ne kadar yol gideceği
             const distance = 500 + Math.random() * 600;
-            // Açıyı kullanarak x ve y mesafesini hesapla
             const radians = angle * Math.PI / 180;
             const tx = Math.cos(radians) * distance;
             const ty = Math.sin(radians) * distance;
             shootingStar.style.setProperty('--tx', `${tx}px`);
             shootingStar.style.setProperty('--ty', `${ty}px`);
             starsContainer.appendChild(shootingStar);
-            // Animasyon bitince elementi sil
             setTimeout(() => {
                 if (shootingStar.parentNode) {
                     shootingStar.parentNode.removeChild(shootingStar);
@@ -174,17 +179,14 @@
             }, 1500);
         }
 
-        // Her 2 - 4 saniyede bir kayan yıldız oluştur
         setInterval(() => {
             createShootingStar();
         }, 3000);
 
-        // İlk başta birkaç tane hemen çıksın
         setTimeout(() => {
             createShootingStar();
             setTimeout(createShootingStar, 800);
         }, 1500);
-        // ===== KAYAN YILDIZ KODU BİTTİ =====
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
