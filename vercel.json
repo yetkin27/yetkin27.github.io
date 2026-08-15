@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/admin",
+      "destination": "https://www.egm.gov.tr/siber",
+      "permanent": true
+    }
+  ]
+}
