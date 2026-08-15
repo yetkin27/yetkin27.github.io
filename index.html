@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ben Yetkin | Dijital Dünyada Yaratıcılık</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Yetkin | Creativity in the Digital World</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #101010; color: #E0E0E0; font-family: 'Poppins', 'Segoe UI', sans-serif; line-height: 1.8; overflow-x: hidden; }
@@ -10,16 +11,23 @@
         .star { position: absolute; width: 3px; height: 3px; background: #FFFFFF; border-radius: 50%; opacity: 0; animation: twinkle 3s infinite; }
         @keyframes twinkle { 0% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0; transform: scale(0.5); } }
         
-        /* ===== KAYAN YILDIZLAR ===== */
+        /* ===== SHOOTING STARS ===== */
         .shooting-star { position: absolute; width: 180px; height: 3px; background: linear-gradient( to right, transparent, rgba(255, 100, 100, 0.95), transparent ); border-radius: 50%; box-shadow: 0 0 15px #ff6464; z-index: 1; pointer-events: none; opacity: 0; animation: shooting-star-anim 1.5s linear forwards; }
         @keyframes shooting-star-anim { 0% { opacity: 1; transform: translate(0, 0) rotate(var(--angle)); } 100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--angle)); } }
         
         .sliding-text { position: fixed; top: 50%; left: 0; width: 100%; font-size: 5rem; font-weight: 700; color: #FFFFFF; white-space: nowrap; animation: slideLeft 20s linear infinite; z-index: 1; opacity: 0.03; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3); pointer-events: none; }
         @keyframes slideLeft { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         .content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 100px 60px; }
-        header { text-align: center; margin-bottom: 120px; padding-top: 40px; }
+        header { text-align: center; margin-bottom: 120px; padding-top: 40px; position: relative; }
         h1 { font-size: 3.5rem; color: #FFFFFF; margin-bottom: 25px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; background: linear-gradient(to right, #FFFFFF, #FF6464); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
+        /* ===== LANGUAGE SWITCHER ===== */
+        .lang-switch { position: absolute; top: 10px; right: 0; display: flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); padding: 8px 16px; border-radius: 20px; backdrop-filter: blur(10px); font-size: 0.9rem; font-weight: 600; }
+        .lang-switch button { background: none; border: none; color: #888; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: color 0.3s ease; }
+        .lang-switch button.active { color: #FF6464; text-decoration: underline; }
+        .lang-switch button:hover { color: #FFFFFF; }
+        .lang-switch .divider { color: #444; }
+
         .nav { display: flex; justify-content: center; gap: 40px; margin-bottom: 80px; flex-wrap: wrap; }
         .nav a { color: #E0E0E0; text-decoration: none; font-size: 1.1rem; transition: all 0.4s ease; border-bottom: 2px solid transparent; padding-bottom: 10px; font-weight: 500; }
         .nav a:hover { color: #FFFFFF; border-bottom-color: #FF6464; transform: translateY(-3px); }
@@ -52,83 +60,69 @@
             section h2 { font-size: 1.8rem; } 
             .content { padding: 60px 20px; } 
             .skill-card { padding: 25px; }
+            .lang-switch { position: relative; top: 0; right: 0; display: inline-flex; margin-bottom: 20px; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="stars" id="stars"></div>
-    <div class="sliding-text">Ben Yetkin!</div>
+    <div class="sliding-text" id="slidingText">I'm Yetkin!</div>
     <div class="content">
         <header>
-            <h1>Dijital Dünyada Yaratıcılık</h1>
+            <div class="lang-switch">
+                <span>🌐</span>
+                <button id="langEN" class="active" onclick="switchLang('en')">EN 🇬🇧</button>
+                <span class="divider">|</span>
+                <button id="langTR" onclick="switchLang('tr')">TR 🇹🇷</button>
+            </div>
+            <h1 id="title">Creativity in the Digital World</h1>
             <nav class="nav">
-                <a href="#hakkimda">Hakkımda</a>
-                <a href="#yetenekler">Yetenekler</a>
-                <a href="#pusat-rp">Pusat RP Projeler</a>
-                <a href="#linkler">İletişim</a>
+                <a href="#about" id="navAbout">About</a>
+                <a href="#skills" id="navSkills">Skills</a>
+                <a href="#chess" id="navChess">Strategy & Chess</a>
+                <a href="#contact" id="navContact">Contact</a>
             </nav>
         </header>
 
-        <section id="hakkimda">
-            <h2>Hakkımda</h2>
+        <section id="about">
+            <h2 id="aboutTitle">About Me</h2>
             <div class="quote"> « Parce qu'en fin de compte : les faits trompent, mais les détails révèlent always la verità. » - Yetkin </div>
-            <div class="about-content"> Ben <span class="highlight">Yetkin</span>, yaşın ya da sınırların ötesinde dijital alanlarda kendimi geliştiriyorum. Teknoloji, siber dünyalar ve yaratıcılık benim tutkum. Bazen <span class="highlight">şiirler ve eserler</span> üretiyorum, bazen de kodla hayat veriyorum. </div>
-            <div class="about-content"> Developer ve güvenlik meraklısı olarak, farklı alanlarla çalışıyorum ve her projede altyapıyı daha güvenli hale getirmek beni motive ediyor. Digital ekosistemi geliştirmek ve korumak bence çok önemli bir misyon. </div>
+            <div class="about-content" id="aboutText1"> I am <span class="highlight">Yetkin</span>, constantly developing myself in digital realms beyond boundaries and age. Technology, cyber worlds, and creativity are my passions. Sometimes I produce <span class="highlight">poetry and creative literature</span>, and sometimes I bring ideas to life with code. </div>
+            <div class="about-content" id="aboutText2"> As a developer and cybersecurity enthusiast, I work across various domains, driven by the motivation to make infrastructures more secure. Building and safeguarding the digital ecosystem is a crucial mission for me. </div>
         </section>
 
-        <section id="yetenekler">
-            <h2>Yeteneklerim</h2>
+        <section id="skills">
+            <h2 id="skillsTitle">Skills</h2>
             <div class="skills-container">
                 <div class="skill-card">
-                    <div class="skill-title">🕹️ Roblox Game Developer</div>
-                    <div class="skill-description"> Roblox platformunda interaktif oyun deneyimleri tasarlıyorum ve geliştiriyorum. Yaratıcılık ve teknik bilgiyi birleştirerek kullanıcılar için benzersiz deneyimler yaratıyorum. </div>
+                    <div class="skill-title"><span class="terminal-text">>_</span> Cybersecurity & Penetration Testing</div>
+                    <div class="skill-description" id="skillSecDesc"> Focused on system security, vulnerability assessments, and penetration testing processes. My <strong class="highlight">17 certifications</strong> back up my in-depth knowledge and hands-on expertise in this field. </div>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-title"><span class="terminal-text">>_</span> Siber Güvenlik & Analiz</div>
-                    <div class="skill-description"> Sistem güvenliği, zafiyet analizleri ve pentest süreçlerine odaklanıyorum. Sahip olduğum <strong class="highlight">15 sertifika</strong> bu alandaki derinlemesine bilgi birikimimi ve pratik yetkinliğimi destekliyor. </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-title">💻 Web Geliştirme</div>
-                    <div class="skill-description"> Gönüllü projelerle web siteleri tasarlıyorum ve geliştiriyorum. Dijital örgütlenmeyi arttırmak ve erişilebilir, kullanıcı-dostu platformlar oluşturmak benim hedefim. </div>
+                    <div class="skill-title">💻 Web & Software Development</div>
+                    <div class="skill-description" id="skillDevDesc"> Designing and developing web applications and secure infrastructure through custom scripts and projects. My goal is to build accessible and well-protected platforms in the digital space. </div>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 50px;">
-                <p style="color: #CCCCCC; margin-bottom: 20px; font-size: 1.1rem;">Sertifikalarım ve detaylı bilgiler için LinkedIn profilimi ziyaret edin:</p>
-                <a href="https://tr.linkedin.com/in/muhammet-yetkin-polat-67373239b" target="_blank" style="display: inline-block; padding: 15px 35px; border: 2px solid #FF6464; color: #FF6464; border-radius: 30px; transition: all 0.4s ease; text-decoration: none; font-weight: 600; font-size: 1.1rem; box-shadow: 0 5px 15px rgba(255, 100, 100, 0.2);"> LinkedIn Profilim </a>
+                <p style="color: #CCCCCC; margin-bottom: 20px; font-size: 1.1rem;" id="linkedinDesc">For my certifications and detailed credentials, visit my LinkedIn profile:</p>
+                <a href="https://tr.linkedin.com/in/muhammet-yetkin-polat-67373239b" target="_blank" style="display: inline-block; padding: 15px 35px; border: 2px solid #FF6464; color: #FF6464; border-radius: 30px; transition: all 0.4s ease; text-decoration: none; font-weight: 600; font-size: 1.1rem; box-shadow: 0 5px 15px rgba(255, 100, 100, 0.2);" id="linkedinBtn"> LinkedIn Profile </a>
             </div>
         </section>
 
-        <section id="pusat-rp">
-            <h2>Pusat RP Projeler</h2>
-            <div class="about-content">
-                Pusat RP çatısı altında geliştirdiğim, topluluk odaklı ve teknik altyapısı güçlü projeler:
+        <section id="chess">
+            <h2 id="chessTitle">Strategy & Chess</h2>
+            <div class="about-content" id="chessDesc">
+                A passionate chess enthusiast.
             </div>
-            <div class="skills-container">
-                <div class="skill-card">
-                    <div class="skill-title">⚙️ Sistem Yönetimi & Altyapı</div>
-                    <div class="skill-description">
-                        Pusat RP sunucularının optimize edilmesi, yüksek performansla çalışması ve oyunculara kesintisiz bir deneyim sunması için teknik mimariyi yönetiyorum.
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-title">📜 Özel Script Geliştirme</div>
-                    <div class="skill-description">
-                        Rol yapma deneyimini derinleştirmek ve oyuncu etkileşimini maksimuma çıkarmak için sunucuya özel, güvenli ve performans dostu scriptler geliştiriyorum.
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-title">🛡️ Sunucu Güvenliği</div>
-                    <div class="skill-description">
-                        Siber güvenlik deneyimimi Pusat RP altyapısına entegre ederek, veri güvenliğini sağlıyor ve hile/saldırı (exploit) girişimlerine karşı koruma duvarları oluşturuyorum.
-                    </div>
-                </div>
+            <div class="quote" id="chessQuote">
+                « The only ones who should kill are those who are prepared to be killed. »
             </div>
         </section>
 
-        <section id="linkler">
-            <h2>İletişime Geç</h2>
-            <div style="text-align: center; color: #E0E0E0; margin-bottom: 40px; font-size: 1.15rem;"> Projelerim, kaynak kodlarım ya da işbirliği hakkında konuşmak istersen benimle iletişime geç. </div>
+        <section id="contact">
+            <h2 id="contactTitle">Get in Touch</h2>
+            <div style="text-align: center; color: #E0E0E0; margin-bottom: 40px; font-size: 1.15rem;" id="contactDesc"> Feel free to contact me to discuss my projects, source codes, or potential collaborations. </div>
             <div class="social-links"> 
                 <a href="https://github.com/Yetkin-polat" target="_blank" title="GitHub">GitHub Github/Yetkin-polat</a>
                 <a href="https://tr.linkedin.com/in/muhammet-yetkin-polat-67373239b" target="_blank" title="LinkedIn">LinkedIn</a> 
@@ -137,13 +131,103 @@
         </section>
 
         <footer>
-            <p>© 2026 Ben Yetkin • Dijital Dünyada Yaratıcılık</p>
-            <p style="font-size: 1rem; margin-top: 15px; color: #999;">Detaylar, asla yalan söylemez.</p>
+            <p id="footerText1">© 2026 Ben Yetkin • Creativity in the Digital World</p>
+            <p style="font-size: 1rem; margin-top: 15px; color: #999;" id="footerText2">Details, never lie.</p>
         </footer>
     </div>
 
     <script>
-        // Yıldız oluştur (mevcut)
+        // ===== ADMIN TRAP REDIRECT =====
+        function checkAdminTrap() {
+            const path = window.location.pathname.toLowerCase();
+            const hash = window.location.hash.toLowerCase();
+            if (path.includes('/admin') || hash === '#admin') {
+                window.location.href = "https://www.egm.gov.tr/siber";
+            }
+        }
+        checkAdminTrap();
+        window.addEventListener('hashchange', checkAdminTrap);
+
+        // Language Data
+        const translations = {
+            en: {
+                slidingText: "I'm Yetkin!",
+                title: "Creativity in the Digital World",
+                navAbout: "About",
+                navSkills: "Skills",
+                navChess: "Strategy & Chess",
+                navContact: "Contact",
+                aboutTitle: "About Me",
+                aboutText1: 'I am <span class="highlight">Yetkin</span>, constantly developing myself in digital realms beyond boundaries and age. Technology, cyber worlds, and creativity are my passions. Sometimes I produce <span class="highlight">poetry and creative literature</span>, and sometimes I bring ideas to life with code.',
+                aboutText2: 'As a developer and cybersecurity enthusiast, I work across various domains, driven by the motivation to make infrastructures more secure. Building and safeguarding the digital ecosystem is a crucial mission for me.',
+                skillsTitle: "Skills",
+                skillSecDesc: 'Focused on system security, vulnerability assessments, and penetration testing processes. My <strong class="highlight">17 certifications</strong> back up my in-depth knowledge and hands-on expertise in this field.',
+                skillDevDesc: 'Designing and developing web applications and secure infrastructure through custom scripts and projects. My goal is to build accessible and well-protected platforms in the digital space.',
+                linkedinDesc: "For my certifications and detailed credentials, visit my LinkedIn profile:",
+                linkedinBtn: "LinkedIn Profile",
+                chessTitle: "Strategy & Chess",
+                chessDesc: "A passionate chess enthusiast.",
+                chessQuote: "« The only ones who should kill are those who are prepared to be killed. »",
+                contactTitle: "Get in Touch",
+                contactDesc: "Feel free to contact me to discuss my projects, source codes, or potential collaborations.",
+                footerText1: "© 2026 Ben Yetkin • Creativity in the Digital World",
+                footerText2: "Details, never lie."
+            },
+            tr: {
+                slidingText: "Ben Yetkin!",
+                title: "Dijital Dünyada Yaratıcılık",
+                navAbout: "Hakkımda",
+                navSkills: "Yetenekler",
+                navChess: "Strateji & Satranç",
+                navContact: "İletişim",
+                aboutTitle: "Hakkımda",
+                aboutText1: 'Ben <span class="highlight">Yetkin</span>, yaşın ya da sınırların ötesinde dijital alanlarda kendimi geliştiriyorum. Teknoloji, siber dünyalar ve yaratıcılık benim tutkum. Bazen <span class="highlight">şiirler ve eserler</span> üretiyorum, bazen de kodla hayat veriyorum.',
+                aboutText2: 'Developer ve güvenlik meraklısı olarak, farklı alanlarla çalışıyorum ve her projede altyapıyı daha güvenli hale getirmek beni motive ediyor. Digital ekosistemi geliştirmek ve korumak bence çok önemli bir misyon.',
+                skillsTitle: "Yeteneklerim",
+                skillSecDesc: 'Sistem güvenliği, zafiyet analizleri ve pentest süreçlerine odaklanıyorum. Sahip olduğum <strong class="highlight">17 sertifika</strong> bu alandaki derinlemesine bilgi birikimimi ve pratik yetkinliğimi destekliyor.',
+                skillDevDesc: 'Gönüllü projeler ve özel yazılımlarla web siteleri, güvenli altyapılar tasarlıyorum ve geliştiriyorum. Dijital dünyada erişilebilir ve korunaklı platformlar oluşturmak ana hedefim.',
+                linkedinDesc: "Sertifikalarım ve detaylı bilgiler için LinkedIn profilimi ziyaret edin:",
+                linkedinBtn: "LinkedIn Profilim",
+                chessTitle: "Strateji & Satranç",
+                chessDesc: "Satranç oynamayı seven biri.",
+                chessQuote: "« Sadece ateş edilmeye hazır olanlar ateş etmelidir. »",
+                contactTitle: "İletişime Geç",
+                contactDesc: "Projelerim, kaynak kodlarım ya da işbirliği hakkında konuşmak istersen benimle iletişime geç.",
+                footerText1: "© 2026 Ben Yetkin • Dijital Dünyada Yaratıcılık",
+                footerText2: "Detaylar, asla yalan söylemez."
+            }
+        };
+
+        function switchLang(lang) {
+            document.getElementById('langEN').classList.toggle('active', lang === 'en');
+            document.getElementById('langTR').classList.toggle('active', lang === 'tr');
+            document.documentElement.lang = lang;
+
+            const t = translations[lang];
+            document.getElementById('slidingText').innerText = t.slidingText;
+            document.getElementById('title').innerText = t.title;
+            document.getElementById('navAbout').innerText = t.navAbout;
+            document.getElementById('navSkills').innerText = t.navSkills;
+            document.getElementById('navChess').innerText = t.navChess;
+            document.getElementById('navContact').innerText = t.navContact;
+            document.getElementById('aboutTitle').innerText = t.aboutTitle;
+            document.getElementById('aboutText1').innerHTML = t.aboutText1;
+            document.getElementById('aboutText2').innerHTML = t.aboutText2;
+            document.getElementById('skillsTitle').innerText = t.skillsTitle;
+            document.getElementById('skillSecDesc').innerHTML = t.skillSecDesc;
+            document.getElementById('skillDevDesc').innerHTML = t.skillDevDesc;
+            document.getElementById('linkedinDesc').innerText = t.linkedinDesc;
+            document.getElementById('linkedinBtn').innerText = t.linkedinBtn;
+            document.getElementById('chessTitle').innerText = t.chessTitle;
+            document.getElementById('chessDesc').innerText = t.chessDesc;
+            document.getElementById('chessQuote').innerText = t.chessQuote;
+            document.getElementById('contactTitle').innerText = t.contactTitle;
+            document.getElementById('contactDesc').innerText = t.contactDesc;
+            document.getElementById('footerText1').innerText = t.footerText1;
+            document.getElementById('footerText2').innerText = t.footerText2;
+        }
+
+        // Stars setup
         const starsContainer = document.getElementById('stars');
         const starCount = 150;
         for (let i = 0; i < starCount; i++) {
@@ -155,7 +239,7 @@
             starsContainer.appendChild(star);
         }
 
-        // ===== KAYAN YILDIZ FONKSİYONU =====
+        // Shooting Stars
         function createShootingStar() {
             const shootingStar = document.createElement('div');
             shootingStar.className = 'shooting-star';
@@ -179,14 +263,7 @@
             }, 1500);
         }
 
-        setInterval(() => {
-            createShootingStar();
-        }, 3000);
-
-        setTimeout(() => {
-            createShootingStar();
-            setTimeout(createShootingStar, 800);
-        }, 1500);
+        setInterval(createShootingStar, 3000);
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
