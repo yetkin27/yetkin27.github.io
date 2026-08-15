@@ -52,6 +52,18 @@
         .terminal-text { font-family: 'Courier New', monospace; color: #FF6464; }
         a { color: #FF6464; text-decoration: none; transition: color 0.3s ease; }
         a:hover { color: #FFFFFF; text-decoration: underline; }
+
+        /* ===== RIPPLE CLICK EFFECT ===== */
+        .click-ripple { position: absolute; border: 2px solid #FF6464; border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); animation: ripple-anim 0.6s linear forwards; z-index: 999; }
+        @keyframes ripple-anim { 0% { width: 0; height: 0; opacity: 1; } 100% { width: 80px; height: 80px; opacity: 0; } }
+
+        /* ===== TERMINAL OVERLAY ===== */
+        #terminalOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
+        .terminal-box { width: 90%; max-width: 700px; background: #0d0d0d; border: 1px solid #FF6464; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 100, 100, 0.2); font-family: 'Courier New', monospace; padding: 20px; overflow: hidden; }
+        .terminal-header { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255, 100, 100, 0.3); padding-bottom: 10px; margin-bottom: 15px; color: #FF6464; font-weight: bold; }
+        .terminal-body { height: 300px; overflow-y: auto; color: #33ff33; font-size: 0.95rem; line-height: 1.5; margin-bottom: 10px; }
+        .terminal-input-line { display: flex; align-items: center; gap: 10px; color: #FF6464; }
+        .terminal-input-line input { background: transparent; border: none; outline: none; color: #FFF; font-family: inherit; font-size: 1rem; width: 100%; }
         
         @media (max-width: 768px) { 
             h1 { font-size: 2.2rem; } 
@@ -68,6 +80,7 @@
 <body>
     <div class="stars" id="stars"></div>
     <div class="sliding-text" id="slidingText">I'm Yetkin!</div>
+    
     <div class="content">
         <header>
             <div class="lang-switch">
@@ -133,7 +146,25 @@
         <footer>
             <p id="footerText1">© 2026 Ben Yetkin • Creativity in the Digital World</p>
             <p style="font-size: 1rem; margin-top: 15px; color: #999;" id="footerText2">Details, never lie.</p>
+            <p style="font-size: 0.85rem; margin-top: 10px; color: #555;">Press <kbd style="border: 1px solid #444; padding: 2px 6px; border-radius: 4px;">~</kbd> or <kbd style="border: 1px solid #444; padding: 2px 6px; border-radius: 4px;">CTRL + K</kbd> for Terminal</p>
         </footer>
+    </div>
+
+    <!-- TERMINAL OVERLAY -->
+    <div id="terminalOverlay">
+        <div class="terminal-box">
+            <div class="terminal-header">
+                <span>YETKIN_OS v2.6 (Terminal)</span>
+                <span style="cursor: pointer;" onclick="toggleTerminal(false)">[X]</span>
+            </div>
+            <div class="terminal-body" id="termBody">
+                <div>Type '<span style="color:#FFF;">help</span>' to see available commands.</div>
+            </div>
+            <div class="terminal-input-line">
+                <span>yetkin@sec:~$</span>
+                <input type="text" id="termInput" autofocus autocomplete="off">
+            </div>
+        </div>
     </div>
 
     <script>
@@ -148,7 +179,7 @@
         checkAdminTrap();
         window.addEventListener('hashchange', checkAdminTrap);
 
-        // Language Data
+        // ===== TRANSLATIONS & STORAGE =====
         const translations = {
             en: {
                 slidingText: "I'm Yetkin!",
@@ -199,6 +230,7 @@
         };
 
         function switchLang(lang) {
+            localStorage.setItem('preferredLang', lang);
             document.getElementById('langEN').classList.toggle('active', lang === 'en');
             document.getElementById('langTR').classList.toggle('active', lang === 'tr');
             document.documentElement.lang = lang;
@@ -227,10 +259,13 @@
             document.getElementById('footerText2').innerText = t.footerText2;
         }
 
-        // Stars setup
+        // Auto language setup
+        const savedLang = localStorage.getItem('preferredLang') || (navigator.language.startsWith('tr') ? 'tr' : 'en');
+        switchLang(savedLang);
+
+        // ===== STARS ANIMATION =====
         const starsContainer = document.getElementById('stars');
-        const starCount = 150;
-        for (let i = 0; i < starCount; i++) {
+        for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             star.style.left = Math.random() * 100 + '%';
@@ -239,40 +274,98 @@
             starsContainer.appendChild(star);
         }
 
-        // Shooting Stars
+        // ===== SHOOTING STARS =====
         function createShootingStar() {
             const shootingStar = document.createElement('div');
             shootingStar.className = 'shooting-star';
-            const startX = Math.random() * window.innerWidth * 0.8;
-            const startY = Math.random() * (window.innerHeight * 0.6);
-            shootingStar.style.left = `${startX}px`;
-            shootingStar.style.top = `${startY}px`;
+            shootingStar.style.left = `${Math.random() * window.innerWidth * 0.8}px`;
+            shootingStar.style.top = `${Math.random() * (window.innerHeight * 0.6)}px`;
             const angle = Math.random() * 60 - 30;
-            shootingStar.style.setProperty('--angle', `${angle}deg`);
             const distance = 500 + Math.random() * 600;
             const radians = angle * Math.PI / 180;
-            const tx = Math.cos(radians) * distance;
-            const ty = Math.sin(radians) * distance;
-            shootingStar.style.setProperty('--tx', `${tx}px`);
-            shootingStar.style.setProperty('--ty', `${ty}px`);
+            shootingStar.style.setProperty('--angle', `${angle}deg`);
+            shootingStar.style.setProperty('--tx', `${Math.cos(radians) * distance}px`);
+            shootingStar.style.setProperty('--ty', `${Math.sin(radians) * distance}px`);
             starsContainer.appendChild(shootingStar);
-            setTimeout(() => {
-                if (shootingStar.parentNode) {
-                    shootingStar.parentNode.removeChild(shootingStar);
-                }
-            }, 1500);
+            setTimeout(() => { if (shootingStar.parentNode) shootingStar.parentNode.removeChild(shootingStar); }, 1500);
+        }
+        setInterval(createShootingStar, 3000);
+
+        // ===== CLICK RIPPLE EFFECT =====
+        document.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.className = 'click-ripple';
+            ripple.style.left = `${e.clientX}px`;
+            ripple.style.top = `${e.clientY + window.scrollY}px`;
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+
+        // ===== TERMINAL LOGIC =====
+        const termOverlay = document.getElementById('terminalOverlay');
+        const termInput = document.getElementById('termInput');
+        const termBody = document.getElementById('termBody');
+
+        function toggleTerminal(show) {
+            termOverlay.style.display = show ? 'flex' : 'none';
+            if (show) termInput.focus();
         }
 
-        setInterval(createShootingStar, 3000);
+        window.addEventListener('keydown', (e) => {
+            if (e.key === '`' || (e.ctrlKey && e.key === 'k')) {
+                e.preventDefault();
+                toggleTerminal(termOverlay.style.display !== 'flex');
+            }
+            if (e.key === 'Escape' && termOverlay.style.display === 'flex') {
+                toggleTerminal(false);
+            }
+        });
+
+        termInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = termInput.value.trim().toLowerCase();
+                termInput.value = '';
+                appendTermOutput(`yetkin@sec:~$ ${cmd}`);
+
+                switch (cmd) {
+                    case 'help':
+                        appendTermOutput("Commands: <br>- <b>whoami</b>: About me<br>- <b>certs</b>: Certification count<br>- <b>socials</b>: Links<br>- <b>clear</b>: Clear output<br>- <b>exit</b>: Close terminal");
+                        break;
+                    case 'whoami':
+                        appendTermOutput("Yetkin | Developer & Cybersecurity Enthusiast.");
+                        break;
+                    case 'certs':
+                        appendTermOutput("Current status: 17 Verified Certifications.");
+                        break;
+                    case 'socials':
+                        appendTermOutput("GitHub: Yetkin-polat | Insta: yetkinp27");
+                        break;
+                    case 'clear':
+                        termBody.innerHTML = '';
+                        break;
+                    case 'exit':
+                        toggleTerminal(false);
+                        break;
+                    default:
+                        appendTermOutput(`Command not recognized: ${cmd}. Type 'help'.`, '#ff6464');
+                }
+            }
+        });
+
+        function appendTermOutput(text, color = '#33ff33') {
+            const line = document.createElement('div');
+            line.style.color = color;
+            line.innerHTML = text;
+            termBody.appendChild(line);
+            termBody.scrollTop = termBody.scrollHeight;
+        }
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
