@@ -161,7 +161,8 @@
             <h2 id="contactTitle">Get in Touch</h2>
             <div style="text-align: center; color: #E0E0E0; margin-bottom: 40px; font-size: 1.15rem;" id="contactDesc"> Feel free to contact me to discuss my projects, source codes, or potential collaborations. </div>
             <div class="social-links"> 
-                <a href="https://github.com/Yetkin-polat" target="_blank" title="GitHub">GitHub Github/Yetkin-polat</a>
+                <a href="https://github.com/yetkin27" target="_blank" title="GitHub (Active)">GitHub /yetkin27</a>
+                <a href="https://github.com/Yetkin-polat" target="_blank" title="GitHub (Archive)" id="oldGithubBtn" style="opacity: 0.75; border-style: dashed;">GitHub (Archive) /Yetkin-polat</a>
                 <a href="https://tr.linkedin.com/in/muhammet-yetkin-polat-67373239b" target="_blank" title="LinkedIn">LinkedIn</a> 
                 <a href="https://www.instagram.com/yetkinp27/" target="_blank" title="Instagram">Instagram</a> 
             </div>
@@ -225,6 +226,7 @@
                 chessQuote: "« The only ones who should kill are those who are prepared to be killed. »",
                 contactTitle: "Get in Touch",
                 contactDesc: "Feel free to contact me to discuss my projects, source codes, or potential collaborations.",
+                oldGithubBtn: "GitHub (Archive) /Yetkin-polat",
                 footerText1: "© 2026 Ben Yetkin • Creativity in the Digital World",
                 footerText2: "Details, never lie."
             },
@@ -248,6 +250,7 @@
                 chessQuote: "« Sadece ateş edilmeye hazır olanlar ateş etmelidir. »",
                 contactTitle: "İletişime Geç",
                 contactDesc: "Projelerim, kaynak kodlarım ya da işbirliği hakkında konuşmak istersen benimle iletişime geç.",
+                oldGithubBtn: "GitHub (Eski Hesap) /Yetkin-polat",
                 footerText1: "© 2026 Ben Yetkin • Dijital Dünyada Yaratıcılık",
                 footerText2: "Detaylar, asla yalan söylemez."
             }
@@ -279,6 +282,7 @@
             document.getElementById('chessQuote').innerText = t.chessQuote;
             document.getElementById('contactTitle').innerText = t.contactTitle;
             document.getElementById('contactDesc').innerText = t.contactDesc;
+            document.getElementById('oldGithubBtn').innerText = t.oldGithubBtn;
             document.getElementById('footerText1').innerText = t.footerText1;
             document.getElementById('footerText2').innerText = t.footerText2;
         }
@@ -362,7 +366,7 @@
                         appendTermOutput("Current status: 17 Verified Certifications.");
                         break;
                     case 'socials':
-                        appendTermOutput("GitHub: Yetkin-polat | Insta: yetkinp27");
+                        appendTermOutput("GitHub: yetkin27 (Old: Yetkin-polat) | Insta: yetkinp27");
                         break;
                     case 'clear':
                         termBody.innerHTML = '';
